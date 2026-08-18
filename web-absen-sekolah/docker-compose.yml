@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  # ============ INI SATU-SATUNYA TUGAS KAMU ============
+  db:
+    image: postgres:15-alpine
+    container_name: database-absensi-saya
+    restart: always
+    environment:
+      POSTGRES_USER: admin_siswa      # Username
+      POSTGRES_PASSWORD: SMKNURUSSALAM2022   # Password (kasih tahu temanmu)
+      POSTGRES_DB: db_absensi         # Nama database
+    volumes:
+      # Volume penyimpanan data PERMANEN
+      - volume_data_siswa:/var/lib/postgresql/data
+      # File init.sql akan otomatis dijalankan saat pertama kali container dibuat
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      # Biar temanmu bisa akses dari aplikasi di luar Docker (atau dari komputernya)
+      - "5432:5432"
+    networks:
+      - jaringan-saya
+
+networks:
+  jaringan-saya:
+
+volumes:
+  volume_data_siswa:   # <-- Nama gudang data permanen
