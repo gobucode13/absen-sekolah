@@ -100,6 +100,23 @@ function requireRole($role) {
  */
 function getCurrentUser() {
     if (!isLoggedIn()) return null;
+    try {
+        $pdo = getDBConnection();
+        $stmt = $pdo->prepare("SELECT * FROM `users` WHERE `id` = :id LIMIT 1");
+        $stmt->execute(['id' => $_SESSION['user_id']]);
+        $user = $stmt->fetch();
+        if ($user) {
+            $_SESSION['identity_number'] = $user['identity_number'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['class_name'] = $user['class_name'];
+            $_SESSION['avatar'] = $user['avatar'] ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80';
+            return $user;
+        }
+    } catch (Exception $e) {
+        // Fallback to session data if DB query fails
+    }
     return [
         'id' => $_SESSION['user_id'],
         'identity_number' => $_SESSION['identity_number'],
@@ -107,7 +124,7 @@ function getCurrentUser() {
         'email' => $_SESSION['email'],
         'role' => $_SESSION['role'],
         'class_name' => $_SESSION['class_name'] ?? null,
-        'avatar' => $_SESSION['avatar']
+        'avatar' => $_SESSION['avatar'] ?? 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80'
     ];
 }
 

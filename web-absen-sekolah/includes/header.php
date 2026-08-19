@@ -80,17 +80,18 @@ $pageTitle = $pageTitle ?? 'Absensi Sekolah - Smart QR Attendance';
             </nav>
 
             <!-- User Profile & Action -->
-            <div class="flex items-center gap-4">
-                <div class="flex items-center gap-3 bg-slate-100/80 border border-slate-200 px-3 py-1.5 rounded-full">
-                    <img src="<?= htmlspecialchars($currentUser['avatar']) ?>" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-white shadow-sm">
+            <div class="flex items-center gap-3">
+                <a href="profile.php" class="flex items-center gap-3 bg-slate-100/80 hover:bg-slate-200/80 border border-slate-200 px-3 py-1.5 rounded-full transition group" title="Klik untuk Edit Profil & Password">
+                    <img src="<?= htmlspecialchars($currentUser['avatar']) ?>" alt="Avatar" class="w-8 h-8 rounded-full object-cover border border-white shadow-sm group-hover:scale-105 transition">
                     <div class="text-left hidden sm:block">
-                        <div class="text-xs font-bold text-slate-900 leading-tight"><?= htmlspecialchars($currentUser['name']) ?></div>
+                        <div class="text-xs font-bold text-slate-900 leading-tight group-hover:text-blue-600 transition"><?= htmlspecialchars($currentUser['name']) ?></div>
                         <div class="text-[10px] text-slate-500 capitalize flex items-center gap-1 font-medium">
                             <span class="inline-block w-2 h-2 rounded-full <?= $currentUser['role'] === 'guru' ? 'bg-purple-500' : 'bg-emerald-500' ?>"></span>
                             <?= $currentUser['role'] ?> <?= $currentUser['class_name'] ? '(' . htmlspecialchars($currentUser['class_name']) . ')' : '' ?>
                         </div>
                     </div>
-                </div>
+                    <i data-lucide="user-cog" class="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition ml-1 hidden sm:inline-block"></i>
+                </a>
 
                 <!-- Logout Button -->
                 <a href="logout.php" class="p-2.5 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 transition" title="Keluar dari Akun">

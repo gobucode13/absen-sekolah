@@ -43,11 +43,15 @@ include __DIR__ . '/includes/header.php';
             </div>
         </div>
 
-        <div class="flex items-center gap-4 w-full md:w-auto">
+        <div class="flex items-center gap-3 w-full md:w-auto">
             <div class="flex-1 md:flex-initial px-5 py-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-center">
                 <div class="text-xl font-black text-emerald-700"><?= number_format($totalHadir) ?></div>
                 <div class="text-[11px] text-emerald-800 font-semibold">Total Presensi Hadir</div>
             </div>
+            <a href="profile.php" class="px-4 py-3 rounded-2xl bg-slate-100 hover:bg-blue-50 text-slate-700 hover:text-blue-600 border border-slate-200 text-xs font-bold transition flex items-center gap-2" title="Edit Foto & Password">
+                <i data-lucide="user-cog" class="w-4 h-4 text-blue-600"></i>
+                <span class="hidden sm:inline">Edit Profil</span>
+            </a>
         </div>
     </div>
 
@@ -156,11 +160,26 @@ include __DIR__ . '/includes/header.php';
                     <?php else: ?>
                         <?php foreach ($myAttendances as $att): ?>
                             <tr class="hover:bg-slate-50/80 transition">
-                                <td class="py-4 px-6 font-semibold text-slate-900"><?= htmlspecialchars($att['subject']) ?></td>
+                                <td class="py-4 px-6 font-semibold text-slate-900">
+                                    <div><?= htmlspecialchars($att['subject']) ?></div>
+                                    <?php if (!empty($att['notes'])): ?>
+                                        <div class="text-xs text-amber-700 font-normal italic mt-0.5 flex items-center gap-1">
+                                            <i data-lucide="info" class="w-3 h-3 text-amber-500"></i>
+                                            <span>Ket: <?= htmlspecialchars($att['notes']) ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                </td>
                                 <td class="py-4 px-6 text-slate-600"><?= htmlspecialchars($att['guru_name']) ?></td>
                                 <td class="py-4 px-6 text-slate-500 text-xs"><?= date('d M Y - H:i:s', strtotime($att['scanned_at'])) ?></td>
                                 <td class="py-4 px-6 text-center">
-                                    <span class="inline-flex items-center px-3 py-1 rounded-full badge-hadir text-xs font-bold">
+                                    <?php 
+                                        $st = strtolower($att['status']);
+                                        $badgeClass = 'bg-emerald-100 text-emerald-700';
+                                        if ($st === 'izin') $badgeClass = 'bg-amber-100 text-amber-800';
+                                        else if ($st === 'sakit') $badgeClass = 'bg-purple-100 text-purple-800';
+                                        else if ($st === 'alpa') $badgeClass = 'bg-rose-100 text-rose-800';
+                                    ?>
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold <?= $badgeClass ?>">
                                         <?= ucfirst($att['status']) ?>
                                     </span>
                                 </td>
