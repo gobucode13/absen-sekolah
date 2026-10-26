@@ -130,6 +130,7 @@ INSERT INTO `users` (`identity_number`, `name`, `email`, `password`, `role`, `cl
 ('0111973783', 'IMRUATUS SOLIKHA', '0111973783@sekolah.sch.id', '$2y$10$JKHBV0jrqZXr27lYldVUlOFmhXQzj/FAtHQ3uvuVIqPi/ygU7215.', 'siswa', 'X KKR', DEFAULT),
 ('0103740557', 'RINDY MEILINA PUTRI', '0103740557@sekolah.sch.id', '$2y$10$JKHBV0jrqZXr27lYldVUlOFmhXQzj/FAtHQ3uvuVIqPi/ygU7215.', 'siswa', 'X KKR', DEFAULT),
 ('0105100130', 'SAFA NI''MATUN AWALIA', '0105100130@sekolah.sch.id', '$2y$10$JKHBV0jrqZXr27lYldVUlOFmhXQzj/FAtHQ3uvuVIqPi/ygU7215.', 'siswa', 'X KKR', DEFAULT);
+('0103740557', 'RINDY MEILINA PUTRI', 'RINDY MEILINA@sekolah.sch.id', '$2y$10$JKHBV0jrqZXr27lYldVUlOFmhXQzj/FAtHQ3uvuVIqPi/ygU7215.', 'siswa', 'X KKR', DEFAULT);
 
 -- Sample Active Session (Oleh Guru ID 1 Dra. Siti Aminah)
 INSERT INTO `sessions` (`id`, `guru_id`, `subject`, `class_name`, `journal_topic`, `journal_notes`, `token`, `valid_minutes`, `expires_at`, `status`) VALUES
